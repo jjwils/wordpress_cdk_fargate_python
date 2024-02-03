@@ -1,5 +1,5 @@
 
-# Wordpress CDK using Fargate and Aurora python Construct
+# Wordpress CDK using Fargate and Aurora python Stack
 
 This uses the latest version of Wordpress in Dockerhub and AuroraMysql 3.05.1 (MySQL 8)
 
