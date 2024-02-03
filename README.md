@@ -3,7 +3,7 @@
 
 This uses the latest version of Wordpress in Dockerhub and AuroraMysql 3.05.1 (MySQL 8)
 
-This eposes port 80, you can add /wp-admin to the url to hit the wordpress admin page.
+This exposes port 80, you can add /wp-admin to the url to hit the wordpress admin page.
 
 TODO: add an EFS mount so plugins and themes are retained when the service is restarted.
 
