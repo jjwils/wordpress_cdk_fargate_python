@@ -1,5 +1,53 @@
 
-# Wordpress CDK using Fargate and Aurora python Construct
+# Wordpress CDK using Fargate and Aurora RDS DB and EFS python Construct
+
+
+## Fargate and EFS Mount Banana Skin
+
+Note unless you take care of IAM and POSIX permissions in the EFS the Fargate task will bot be able to mount the EFS.
+
+See here for explanation https://aws.amazon.com/blogs/containers/developers-guide-to-using-amazon-efs-with-amazon-ecs-and-aws-fargate-part-2/#:%7E:text=POSIX%20permissions
+
+And here for a good example of how to so it right - https://bliskavka.com/2021/10/21/AWS-CDK-Fargate-with-EFS/
+
+Key points are that IAM permmissons need to be set
+
+```
+ # Define the IAM policy statement with broader EFS permissions
+        efs_policy_statement = iam.PolicyStatement(
+            actions=[
+                "elasticfilesystem:ClientMount",
+                "elasticfilesystem:ClientWrite",
+                "elasticfilesystem:DescribeMountTargets",
+                # Include additional permissions as necessary
+            ],
+            resources=["*"],  # Best practice is to specify more restrictive resource ARNs
+            effect=iam.Effect.ALLOW
+        )
+```
+
+and IAM needs to be enabled in the configuration for the volume
+
+```
+ # Add the EFS volume to the task definition
+        task_definition.add_volume(
+            name="WebRoot",
+            efs_volume_configuration=ecs.EfsVolumeConfiguration(
+                file_system_id=file_system.file_system_id,
+                transit_encryption='ENABLED',
+                authorization_config=ecs.AuthorizationConfig(
+                    iam = 'ENABLED',
+                    access_point_id=access_point.access_point_id,
+                    
+                )
+            )
+        )
+
+```
+
+
+
+
 
 This uses the latest version of Wordpress in Dockerhub and AuroraMysql 3.05.1 (MySQL 8)
 
