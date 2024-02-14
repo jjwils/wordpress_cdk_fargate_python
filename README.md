@@ -1,10 +1,14 @@
 
 # Wordpress CDK using Fargate and Aurora RDS DB and EFS python Construct
 
+##  EFS is essential for Persistence of Wordpress Themes and Plugins
+
+If wordpress tasks are restarted then without an EFS mount Wordpress loses its configuration around themes and plugins.  Note other stuff such as posts ans users etc is persisted in the DB.
+
 
 ## Fargate and EFS Mount Banana Skin
 
-Note unless you take care of IAM and POSIX permissions in the EFS the Fargate task will bot be able to mount the EFS.
+Note unless you take care of IAM and POSIX permissions in the EFS the Fargate task will not be able to mount the EFS.
 
 See here for explanation https://aws.amazon.com/blogs/containers/developers-guide-to-using-amazon-efs-with-amazon-ecs-and-aws-fargate-part-2/#:%7E:text=POSIX%20permissions
 
