@@ -57,8 +57,7 @@ This uses the latest version of Wordpress in Dockerhub and AuroraMysql 3.05.1 (M
 
 This exposes port 80, you can add /wp-admin to the url to hit the wordpress admin page.
 
-TODO: add an EFS mount so plugins and themes are retained when the service is restarted.
-
+------------------------
 
 This is a blank project for CDK development with Python.
 
