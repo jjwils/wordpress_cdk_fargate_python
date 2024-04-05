@@ -24,7 +24,7 @@ class WordpressFargateAuroraStack(Stack):
 
         # Define an Aurora MySQL database
         aurora_cluster = rds.DatabaseCluster(self, "MyAuroraCluster",
-            engine=rds.DatabaseClusterEngine.aurora_mysql(version=rds.AuroraMysqlEngineVersion.VER_3_05_1),
+            engine=rds.DatabaseClusterEngine.aurora_mysql(version=rds.AuroraMysqlEngineVersion.VER_3_06_0),
             instance_props=rds.InstanceProps(
                 vpc=vpc,
                 vpc_subnets=ec2.SubnetSelection(subnet_type=ec2.SubnetType.PRIVATE_WITH_EGRESS),
