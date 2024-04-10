@@ -1,6 +1,10 @@
 
 # Wordpress CDK using Fargate and Aurora RDS DB and EFS python Construct
 
+##  Wordpress install screen and unhealthy load balancer target ##
+
+Load balancer health is looking for a 200, a fresh wordpress will redirect (302) to \install.php.  You must go through this intstall (2mins) for the target ecs cluster to reach a steady state, otherwise fargate will keep redploying in a loop.
+
 ##  EFS is essential for Persistence of Wordpress Themes and Plugins
 
 If wordpress tasks are restarted then without an EFS mount Wordpress loses its configuration around themes and plugins.  Note other stuff such as posts ans users etc is persisted in the DB.
